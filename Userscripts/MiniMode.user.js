@@ -4,7 +4,10 @@
 // @description A mini mode for Lala
 // @include     *
 // @author      Adam Nolley
-// @version     1.1
+// @version     1.2
+// @updated     04/10/09
+// @udated by   Joshua Goggans
+// @notes		updated to resize correctly with the new lala.com interface design
 // ==/UserScript==
 
 if (typeof jQuery == "undefined") {
@@ -35,11 +38,11 @@ if (!window.__lala_MiniMode_loaded && typeof jQuery != "undefined") {
 			
 			// Create the element and set its CSS properties
 			jQuery(
-				'<div style="position: absolute; top: 0; right: 0; padding: 3px 2px 0 0; height: 35px; width: 23px; z-index: 10000"></div>'
+				'<div id="__lala_MiniMode_Box" style="position: absolute; top: 0; right: 0; padding: 1px 3px 0 0; height: 15px; width: 15px; z-index: 10000;"></div>'
 			).css({
 				background: jQuery("#playerRegion").css("background-color")
 			}).append(
-				'<div id="__lala_MiniMode_Button" title="Mini mode" style="float: right; height: 20px; width: 18px; padding-right: 3px; color: white; font-weight: normal; font-size: 22px; line-height: 0.8; text-align: right; text-decoration: none; cursor: pointer;">&#x2296;</div>'
+				'<div id="__lala_MiniMode_Button" title="Mini mode" style="float: right; height: 15px; width: 15px; padding 0 0 0 0; color: white; font-weight: normal; font-size: 22px; line-height: 0.8; text-align: right; text-decoration: none; cursor: pointer;">&#x2296;</div>'
 			).toggle(
 				// We'll switch between big and small on click
 				
@@ -54,13 +57,13 @@ if (!window.__lala_MiniMode_loaded && typeof jQuery != "undefined") {
 					__lala_MiniMode.oldBackground = jQuery("#headerRegion").css("background-color");
 					
 					// Shrink into mini mode
-					window.resizeTo(605, 38 + getChromeHeight());
+					window.resizeTo(713, 58 + getChromeHeight());
 					
 					// Kill the scrollbars
 					jQuery("html").css("overflow", "hidden");
 					
 					// Hide things that will clutter up the display
-					jQuery("#headerSearchBox,#headerNav,#headerLogoCell,#headerStripes").css("display", "none");
+					jQuery("#headerSearchBox,#headerNav,#headerLogoCell,#headerStripes,#headerPlaylistButton,#headerShareButton,#btnSeparator").css("display", "none");
 					
 					// Resize the header
 					jQuery("#headerRegion").height(window.innerHeight).css("background-color", jQuery("#playerRegion").css("background-color"));
@@ -68,11 +71,13 @@ if (!window.__lala_MiniMode_loaded && typeof jQuery != "undefined") {
 					// Fix the player width
 					jQuery("#litePlayerEmbed").css("width", 588);
 					
-					// Change the button glyph
-					jQuery("#__lala_MiniMode_Button").html("&#x2295;").attr("title", "Normal mode");
+					// Change the button glyph & possition
+					jQuery("#__lala_MiniMode_Button").html("&#x2295;").attr("title", "Normal Mode");
 					
-				},
+					jQuery("#__lala_MiniMode_Box").attr("style", "position: absolute; top: 0; right: 0; padding: 1px 260px 0 0; height: 15px; width: 15px; z-index: 10000;");
+
 				
+				},
 				// Small -> Big
 				function() {
 					
@@ -83,7 +88,7 @@ if (!window.__lala_MiniMode_loaded && typeof jQuery != "undefined") {
 					jQuery("html").css("overflow", "auto");
 					
 					// Show the things we hid
-					jQuery("#headerSearchBox,#headerNav").css("display", "block");
+					jQuery("#headerSearchBox,#headerNav,#headerPlaylistButton,#headerShareButton,#btnSeparator").css("display", "block");
 					jQuery("#headerLogoCell,#headerStripes").css("display", "table-cell");
 					
 					// Put the player back to its original size
@@ -92,8 +97,10 @@ if (!window.__lala_MiniMode_loaded && typeof jQuery != "undefined") {
 					// Restore color
 					jQuery("#headerRegion").height(__lala_MiniMode.oldHeaderHeight).css("background-color", __lala_MiniMode.oldBackground);
 					
-					// Change the button glyph
-					jQuery("#__lala_MiniMode_Button").html("&#x2296;").attr("title", "Mini mode");
+					// Change the back button glyph & possition
+					jQuery("#__lala_MiniMode_Button").html("&#x2296;").attr("title", "Mini Mode");
+					
+					jQuery("#__lala_MiniMode_Box").attr("style", "position: absolute; top: 0; right: 0; padding: 1px 3px 0 0; height: 15px; width: 15px; z-index: 10000;");
 					
 				}
 			).andSelf(
