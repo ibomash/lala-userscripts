@@ -1,0 +1,17 @@
+#navPane {
+	border-left-color: transparent !important;
+	margin-left: -1px !important;
+	padding-right: 1px !important;
+}
+
+#feedbackSectionBox {
+	margin-right: -1px !important;
+}
+
+#themeHolder {
+	border-right-color: transparent !important;
+}
+
+#headerCredits, #headerNav td.links {
+	border: none !important;
+}
