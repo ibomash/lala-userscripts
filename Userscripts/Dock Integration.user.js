@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name        Dock Integration
 // @namespace   http://fluidapp.com
-// @description Add Dock menu item for Play/Pause and badge the Dock icon for new notifications.
+// @description Add Dock menu item for Play/Pause and badge the Dock icon for new notifications. version 1.1: Modified to work with Lala site redesign.  Original scripts here: http://nanovivid.com/stuff/fluid-userscripts-for-lala/
 // @include     *
-// @author      Adam Nolley
-// @version     1.0
+// @author      Adam Nolley/Chethan Pandarinath
+// @version     1.1
 // ==/UserScript==
 
 
@@ -75,8 +75,13 @@ window.addEventListener('load', function() {
 }, false);
 
 
-// Add Play/Pause menu item
+
 if (!window.__lalaDockMenus_Initialized) {
 	window.__lalaDockMenus_Initialized = true;
-	window.fluid.addDockMenuItem("Play/Pause", function() { Header.getPlayer().togglePlayback(); });
+	// Add Play/Pause menu item
+	window.fluid.addDockMenuItem("Play/Pause", function() { Player.g.togglePlayback(); });
+	// Add Previous Track menu item
+	window.fluid.addDockMenuItem("Previous Track", function() { Player.g.prevTrack(); });
+	// Add Next Track menu item
+	window.fluid.addDockMenuItem("Next Track", function() { Player.g.nextTrack(); });
 }
